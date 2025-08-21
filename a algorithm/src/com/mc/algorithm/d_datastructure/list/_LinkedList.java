@@ -133,17 +133,17 @@ public class _LinkedList<E> implements Iterable<E>{
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
 			
-			private int pointer = 0; // pointer가 인덱스 
+			private Node<E> pointer = head; // pointer가 인덱스 
 
 			@Override
 			public boolean hasNext() {
-				return pointer < size;
+				return pointer != null;
 			}
 
 			@Override
 			public E next() {
-				E  e = get(pointer);
-				pointer++;
+				E  e = pointer.data();
+				pointer = pointer.next();
 				return e;
 			}
 		};
