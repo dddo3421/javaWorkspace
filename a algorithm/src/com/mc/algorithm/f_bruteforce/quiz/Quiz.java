@@ -13,6 +13,12 @@ public class Quiz { //종말의 수 문제, n번째로 666이 연속되는 수 �
 		
 	}
 
+	
+	
+	
+	
+	
+	
 	private static void q1(int i) {
 		int[] dn = new int[i]; // 666이 연속되는 수를 저장할 배열
 		
