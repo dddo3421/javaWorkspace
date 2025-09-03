@@ -20,7 +20,8 @@ public class StudentInjectMainSecure2 {
 		ResultSet rs = null;
 		Scanner sc = new Scanner(System.in);
 
-		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]|[select|delete|update|insert|create|alter|drop|all|union]");
+		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]|select|delete|update|insert|create|alter|drop|all|union"); // 괄호를 빼서 단어만 필터링
+//		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]|[select|delete|update|insert|create|alter|drop|all|union]");  // 단어가 아니라 s e l ... 문자 하나하나 필터링
 		Matcher matcher = null;
 
 		try {
@@ -40,7 +41,7 @@ public class StudentInjectMainSecure2 {
 			// 필터링 통해 취약점 제거
 			// String sql = "select * from student where stdNo='" + studentNo + "'";
 			if (match) {
-				String sql = "select * from student where stdNo='?'";
+				String sql = "select * from student where stdNo= ?";
 				System.out.println(sql);
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, studentNo);

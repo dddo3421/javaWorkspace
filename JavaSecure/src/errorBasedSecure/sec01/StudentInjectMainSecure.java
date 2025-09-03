@@ -1,4 +1,4 @@
-package secure.sec01;
+package errorBasedSecure.sec01;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class StudentInjectMain {
+public class StudentInjectMainSecure {
 
 	public static void main(String[] args) {
 		// 취약점이 있는 코드/잘못 개발된 코드 
@@ -52,7 +52,8 @@ public class StudentInjectMain {
 			
 						
 		} catch (SQLException e) {
-			e.printStackTrace(); //개발단계에서 개발자가 확인하기 위한 에러 출력문
+			//e.printStackTrace(); // 개발단계에서 개발자가 확인하기 위한 에러 출력문
+			System.out.println("프로그램 실행 중 오류 발생 프로그램 종료");
 		}
 		
 	}

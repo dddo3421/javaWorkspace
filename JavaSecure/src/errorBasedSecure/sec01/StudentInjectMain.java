@@ -1,29 +1,31 @@
-package secure.sec01;
+package errorBasedSecure.sec01;
 
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-//Book테이블 진행
-public class BookInjectMain {
+public class StudentInjectMain {
 
 	public static void main(String[] args) {
-		
-		DBConnect dbCon = new DBConnect(); 
-		Connection con = dbCon.getConnection(); 
+		// 취약점이 있는 코드/잘못 개발된 코드 
+		DBConnect dbCon = new DBConnect(); //DBconnect 객체 하나 구성
+		Connection con = dbCon.getConnection(); // Connection을 통해 데이터베이스와 연결 
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Scanner sc = new Scanner(System.in);
 		
 		try {
-			System.out.print("책 번호 입력 : ");
+			System.out.print("학생 번호 입력 : ");
 			String studentNo = sc.nextLine(); 
-			System.out.println(bookNo);
-
-			String sql = "select * from student where stdNo='" + bookNo + "'"; 			
+			System.out.println(studentNo);
+			
+			//sql 쿼리문 작성 - 플레이스홀더 사용하지 않고 변수 이용해서 하드코딩(전체컬럼 추출)
+			//preparedstatement를 사용하지만 바인딩하고 있지 않음
+			String sql = "select * from student where stdNo='" + studentNo + "'"; 			
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql); // 하드코딩된 쿼리 구문 그대로 적용 가능
 			rs = pstmt.executeQuery();
@@ -34,12 +36,12 @@ public class BookInjectMain {
 			
 			//필요 내용만 추출
 			while(rs.next()) {
-				String bookNo = rs.getString(1);
-				String bookName = rs.getString(2);
-				int bookDate = rs.getInt(3);
+				String stdNo = rs.getString(1);
+				String stdName = rs.getString(2);
+				int stdYear = rs.getInt(3);
 				
 				//한 행씩 출력
-				System.out.printf("%-10s\t %-20s\t %6d \n", bookNo, bookName, bookDate);
+				System.out.printf("%-10s\t %-20s\t %6d \n", stdNo, stdName, stdYear);
 				
 			}
 			
@@ -53,9 +55,6 @@ public class BookInjectMain {
 			e.printStackTrace(); //개발단계에서 개발자가 확인하기 위한 에러 출력문
 		}
 		
-	}
-
-}
 	}
 
 }
